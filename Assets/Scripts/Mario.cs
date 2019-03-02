@@ -27,6 +27,7 @@ public class Mario : MonoBehaviour {
                                               //that player either rising or falling with exact same response every time our player flaps
                 rb2d.AddForce(new Vector2(0, upForce));
                 anim.SetTrigger("Flap"); // Playing animation by setting the trigger
+                GetComponent<AudioSource>().Play();
             }
         }
 	}
@@ -35,7 +36,8 @@ public class Mario : MonoBehaviour {
     {
         rb2d.velocity = Vector2.zero;
         isDead = true;
-        anim.SetTrigger("Die"); // Setting the die state as we anytime we crash into something we die
+        anim.SetTrigger("Die"); // Setting the die state as anytime we crash, into something we die
         GameControl.instance.MarioDied();
+        GetComponent<PolygonCollider2D>().enabled = false;
     }
 }
